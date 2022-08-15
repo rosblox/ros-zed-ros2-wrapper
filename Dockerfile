@@ -25,3 +25,5 @@ RUN git clone --recursive https://github.com/stereolabs/zed-ros2-wrapper src/zed
     colcon build --symlink-install --event-handlers console_direct+ --base-paths src/zed-ros2-wrapper --cmake-args ' -DCMAKE_BUILD_TYPE=Release' ' -DCMAKE_LIBRARY_PATH=/usr/local/cuda/lib64/stubs' ' -DCMAKE_CXX_FLAGS="-Wl,--allow-shlib-undefined"'
 
 WORKDIR /
+
+COPY ros_entrypoint.sh .
