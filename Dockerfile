@@ -1,6 +1,7 @@
-FROM --platform=arm64 dustynv/ros:foxy-ros-base-l4t-r34.1.1
+FROM --platform=arm64 dustynv/ros:humble-ros-base-l4t-r35.1.0
 
-ARG ZED_SDK_URL="https://download.stereolabs.com/zedsdk/3.7/l4t34.1/jetsons"
+
+ARG ZED_SDK_URL="https://download.stereolabs.com/zedsdk/3.8/l4t35.1/jetsons"
 ARG ZED_SDK_RUN="ZED_SDK_Linux_JP.run"
 
 RUN cd /tmp && \
