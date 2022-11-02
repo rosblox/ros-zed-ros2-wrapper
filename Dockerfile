@@ -5,6 +5,7 @@ ARG ZED_SDK_URL="https://download.stereolabs.com/zedsdk/3.8/l4t35.1/jetsons"
 ARG ZED_SDK_RUN="ZED_SDK_Linux_JP.run"
 
 RUN cd /tmp && \
+    apt update && apt install zstd -y --no-install-recommends && \
     wget --quiet --show-progress --progress=bar:force:noscroll --no-check-certificate ${ZED_SDK_URL} -O ${ZED_SDK_RUN} && \
     chmod +x ${ZED_SDK_RUN} && \
     ./${ZED_SDK_RUN} silent skip_tools && \
