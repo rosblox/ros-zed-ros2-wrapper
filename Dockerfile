@@ -23,20 +23,14 @@ RUN cd /tmp && \
 
 WORKDIR /colcon_ws
 
-ENV RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+# ENV RMW_IMPLEMENTATION=rmw_fastrtps_cpp
 
 COPY  --from=unzipper /opt/xacro src/xacro    
 COPY  --from=unzipper /opt/diagnostics src/diagnostics    
 
-# COPY  --from=unzipper /opt/ament_cmake src/ament_cmake    
-# apt-get update && \
-# rosdep install --from-paths src --ignore-src --rosdistro ${ROS_DISTRO} -y --skip-keys "rcutils visualization_msgs rosidl_default_generators ament_index_python ament_cmake rtabmap find_object_2d Pangolin libopencv-dev libopencv-contrib-dev libopencv-imgproc-dev python-opencv python3-opencv" && \
-# rm -rf /var/lib/apt/lists/* && \
-# apt-get clean && \
-
 RUN git clone --recursive https://github.com/stereolabs/zed-ros2-wrapper src/zed-ros2-wrapper && \
     . /opt/ros/${ROS_DISTRO}/install/setup.sh && \
-    colcon build --symlink-install --event-handlers console_direct+ --base-paths src/zed-ros2-wrapper --cmake-args ' -DCMAKE_BUILD_TYPE=Release' ' -DCMAKE_LIBRARY_PATH=/usr/local/cuda/lib64/stubs' ' -DCMAKE_CXX_FLAGS="-Wl,--allow-shlib-undefined"'
+    colcon build --symlink-install --event-handlers console_direct+ --base-paths src --cmake-args ' -DCMAKE_BUILD_TYPE=Release' ' -DCMAKE_LIBRARY_PATH=/usr/local/cuda/lib64/stubs' ' -DCMAKE_CXX_FLAGS="-Wl,--allow-shlib-undefined"'
 
 WORKDIR /
 
