@@ -2,8 +2,11 @@ FROM --platform=arm64  alpine:latest as unzipper
 
 RUN apk add unzip wget curl
 WORKDIR /opt
-RUN wget https://github.com/ros/xacro/archive/refs/tags/2.0.8.tar.gz -O - | tar -xvz && mv xacro-2.0.8 xacro
-RUN wget https://github.com/ros/diagnostics/archive/refs/tags/3.0.0.tar.gz -O - | tar -xvz && mv diagnostics-3.0.0 diagnostics
+
+ARG XACRO_VERSION=2.0.8
+RUN wget https://github.com/ros/xacro/archive/refs/tags/${XACRO_VERSION}.tar.gz -O - | tar -xvz && mv xacro-${XACRO_VERSION} xacro
+ARG DIAGNOSTICS_VERSION=3.0.0
+RUN wget https://github.com/ros/diagnostics/archive/refs/tags/${DIAGNOSTICS_VERSION}.tar.gz -O - | tar -xvz && mv diagnostics-${DIAGNOSTICS_VERSION} diagnostics
 
 
 FROM --platform=arm64 dustynv/ros:humble-ros-base-l4t-r35.1.0
