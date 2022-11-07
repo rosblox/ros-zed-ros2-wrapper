@@ -32,4 +32,4 @@ jobs:
           context: .
           platforms: linux/arm64
           push: true
-          tags: ghcr.io/rosblox/${{ github.event.repository.name }}:foxy
+          tags: ghcr.io/rosblox/${{ github.event.repository.name }}:humble
