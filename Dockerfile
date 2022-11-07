@@ -23,8 +23,6 @@ RUN cd /tmp && \
 
 WORKDIR /colcon_ws
 
-# ENV RMW_IMPLEMENTATION=rmw_fastrtps_cpp
-
 COPY  --from=unzipper /opt/xacro src/xacro    
 COPY  --from=unzipper /opt/diagnostics src/diagnostics    
 
