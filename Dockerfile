@@ -9,6 +9,7 @@ ARG DIAGNOSTICS_VERSION=3.0.0
 RUN wget https://github.com/ros/diagnostics/archive/refs/tags/${DIAGNOSTICS_VERSION}.tar.gz -O - | tar -xvz && mv diagnostics-${DIAGNOSTICS_VERSION} diagnostics
 
 
+
 FROM --platform=arm64 dustynv/ros:humble-ros-base-l4t-r35.1.0
 
 ARG ZED_SDK_URL="https://download.stereolabs.com/zedsdk/3.8/l4t35.1/jetsons"
