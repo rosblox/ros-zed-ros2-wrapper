@@ -1,0 +1,1 @@
+docker run -it --rm ghcr.io/rosblox/ros-zed-ros2-wrapper:humble

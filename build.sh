@@ -1,0 +1,1 @@
+docker build --progress=plain -t ghcr.io/rosblox/ros-zed-ros2-wrapper:humble .
