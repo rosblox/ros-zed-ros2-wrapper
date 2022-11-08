@@ -30,8 +30,9 @@ WORKDIR /colcon_ws
 COPY  --from=unzipper /opt/xacro src/xacro    
 COPY  --from=unzipper /opt/diagnostics src/diagnostics    
 
-RUN git clone --recursive https://github.com/stereolabs/zed-ros2-wrapper src/zed-ros2-wrapper && \
-    . /opt/ros/${ROS_DISTRO}/install/setup.sh && \
+COPY ./zed-ros2-wrapper src/zed-ros2-wrapper
+
+RUN . /opt/ros/${ROS_DISTRO}/install/setup.sh && \
     colcon build --symlink-install --event-handlers console_direct+ --base-paths src --cmake-args ' -DCMAKE_BUILD_TYPE=Release' ' -DCMAKE_LIBRARY_PATH=/usr/local/cuda/lib64/stubs' ' -DCMAKE_CXX_FLAGS="-Wl,--allow-shlib-undefined"'
 
 WORKDIR /
