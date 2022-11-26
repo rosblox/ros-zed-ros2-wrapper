@@ -15,6 +15,8 @@ FROM --platform=arm64 dustynv/ros:humble-ros-base-l4t-r35.1.0
 ARG ZED_SDK_URL="https://download.stereolabs.com/zedsdk/3.8/l4t35.1/jetsons"
 ARG ZED_SDK_RUN="ZED_SDK_Linux_JP.run"
 
+RUN chmod 1777 /tmp
+
 RUN cd /tmp && \
     apt update && apt install zstd -y --no-install-recommends && \
     wget --quiet --show-progress --progress=bar:force:noscroll --no-check-certificate ${ZED_SDK_URL} -O ${ZED_SDK_RUN} && \
@@ -40,4 +42,4 @@ WORKDIR /
 COPY ros_entrypoint.sh .
 
 RUN echo 'alias build="colcon build --symlink-install  --event-handlers console_direct+"' >> ~/.bashrc
-RUN echo 'alias run="ros2 launch zed_wrapper zedm.launch.py"' >> ~/.bashrc
+RUN echo 'alias run="ros2 launch zed_wrapper zed2i.launch.py"' >> ~/.bashrc
