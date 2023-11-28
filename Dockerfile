@@ -84,7 +84,7 @@ RUN /bin/bash -c "source /opt/ros/$ROS_DISTRO/install/setup.bash && \
 
 
 RUN chmod 755 /usr/local/lib/python3.8/dist-packages/* && \
-    chmod -R 775 /usr/local/zed/
+    chmod -R 777 /usr/local/zed/
 
 COPY ros_entrypoint.sh /
 
