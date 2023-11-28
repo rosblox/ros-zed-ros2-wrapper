@@ -51,7 +51,7 @@ ENV ROS_DISTRO ${ROS2_DIST}
 # Install the ZED ROS2 Wrapper
 WORKDIR /colcon_ws/src
 COPY zed-ros2-wrapper zed-ros2-wrapper
-# RUN git clone --recursive https://github.com/stereolabs/zed-ros2-wrapper.git
+
 
 # Install missing dependencies
 RUN wget https://github.com/ros/xacro/archive/refs/tags/${XACRO_VERSION}.tar.gz -O - | tar -xvz && mv xacro-${XACRO_VERSION} xacro && \
@@ -75,12 +75,16 @@ RUN python3 -m pip install --upgrade cython
 
 # Build the dependencies and the ZED ROS2 Wrapper
 RUN /bin/bash -c "source /opt/ros/$ROS_DISTRO/install/setup.bash && \
-  colcon build --parallel-workers $(nproc) \
+  colcon build --symlink-install --parallel-workers $(nproc) \
   --event-handlers console_direct+ --base-paths src \
   --cmake-args ' -DCMAKE_BUILD_TYPE=Release' \
   ' -DCMAKE_LIBRARY_PATH=/usr/local/cuda/lib64/stubs' \
   ' -DCMAKE_CXX_FLAGS="-Wl,--allow-shlib-undefined"' \
   ' --no-warn-unused-cli' "
+
+
+RUN chmod 755 /usr/local/lib/python3.8/dist-packages/* && \
+    chmod -R 775 /usr/local/zed/
 
 COPY ros_entrypoint.sh /
 

@@ -1,10 +1,13 @@
 #!/bin/bash
-set -e
+# set -e
 
 id -u ros &>/dev/null || adduser --quiet --disabled-password --gecos '' --uid ${UID:=1000} --uid ${GID:=1000} ros
 
+usermod -aG staff ros
+usermod -aG video ros
+
 source "/opt/ros/$ROS_DISTRO/install/setup.bash"
-source /root/ros2_ws/install/setup.bash
+source /colcon_ws/install/setup.bash
 
 
 # Welcome information
