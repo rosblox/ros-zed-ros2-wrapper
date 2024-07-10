@@ -1,14 +1,8 @@
 #!/bin/bash
 
-REPOSITORY_NAME="$(basename "$(dirname -- "$( readlink -f -- "$0"; )")")"
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
-docker run -it --rm \
---network=host \
---ipc=host \
---pid=host \
---env UID=$(id -u) \
---env GID=$(id -g) \
---runtime=nvidia \
---privileged \
--v /dev:/dev \
-ghcr.io/rosblox/${REPOSITORY_NAME}:humble
+export HOST_UID=$(id -u)
+
+docker compose -f $SCRIPT_DIR/docker-compose.yml run \
+ros-zed-ros2-wrapper bash

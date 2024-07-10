@@ -1,0 +1,23 @@
+services:
+  ros-zed-ros2-wrapper:
+    image: ghcr.io/rosblox/ros-zed-ros2-wrapper:humble
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    network_mode: "host"
+    privileged: true
+    ipc: host
+    pid: host
+    environment:
+      - UID=${HOST_UID}
+      - ROS_DOMAIN_ID
+    runtime: nvidia
+    volumes:
+      - /dev:/dev
+    command: su - ros --whitelist-environment=ROS_DOMAIN_ID /run.sh
+
+
+            # environment:
+            # - NVIDIA_VISIBLE_DEVICES=all
+            # - NVIDIA_DRIVER_CAPABILITIES=all
